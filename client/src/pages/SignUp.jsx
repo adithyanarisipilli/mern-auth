@@ -10,18 +10,21 @@ export default function SignUp() {
           placeholder="Username"
           id="username"
           className="bg-slate-100 p-5 rounded-lg text-lg" // Setting font size to text-lg
+          style={{ fontSize: "24px", lineHeight: "32px", padding: "12px" }}
         />
         <input
           type="email"
           placeholder="Email"
           id="email"
           className="bg-slate-100 p-5 rounded-lg text-lg" // Setting font size to text-lg
+          style={{ fontSize: "24px", lineHeight: "32px", padding: "12px" }}
         />
         <input
           type="password"
           placeholder="Password"
           id="password"
           className="bg-slate-100 p-5 rounded-lg text-lg" // Setting font size to text-lg
+          style={{ fontSize: "24px", lineHeight: "32px", padding: "12px" }}
         />
         <button className="bg-slate-700 text-white text-2xl p-5 rounded-3xl uppercase hover:opacity-95 disabled:opacity-80">
           Sign up
