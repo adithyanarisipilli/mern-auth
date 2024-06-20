@@ -5,23 +5,23 @@ export default function Header() {
     <div className="bg-black text-white">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
-          <h1 className="font-bold text-4xl">
+          <h1 className="font-bold text-5xl">
             <span className="text-blue-500">A</span>uth{" "}
             <span className="text-blue-500">A</span>pp
           </h1>
         </Link>
-        <ul className="flex gap-10 text-xl">
+        <ul className="flex gap-10 text-3xl">
           <Link to="/">
-            <li className="text-xl">Home</li>
+            <li className="text-2xl">Home</li>
           </Link>
           <Link to="/about">
-            <li className="text-xl">About</li>
+            <li className="text-2xl">About</li>
           </Link>
           <Link to="/sign-up">
-            <li className="text-xl">Sign Up</li>
+            <li className="text-2xl">Sign Up</li>
           </Link>
           <Link to="/sign-in">
-            <li className="text-xl">Sign In</li>
+            <li className="text-2xl">Sign In</li>
           </Link>
         </ul>
       </div>
