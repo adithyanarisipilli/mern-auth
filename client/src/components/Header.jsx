@@ -1,27 +1,31 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
-    <div className="bg-black text-white">
+    <div className="bg-slate-200">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
-          <h1 className="font-bold text-5xl">
-            <span className="text-blue-500">A</span>uth{" "}
-            <span className="text-blue-500">A</span>pp
-          </h1>
+          <h1 className="font-bold">Auth App</h1>
         </Link>
-        <ul className="flex gap-10 text-3xl">
+        <ul className="flex gap-4">
           <Link to="/">
-            <li className="text-2xl">Home</li>
+            <li>Home</li>
           </Link>
           <Link to="/about">
-            <li className="text-2xl">About</li>
+            <li>About</li>
           </Link>
-          <Link to="/sign-up">
-            <li className="text-2xl">Sign Up</li>
-          </Link>
-          <Link to="/sign-in">
-            <li className="text-2xl">Sign In</li>
+          <Link to="/profile">
+            {currentUser ? (
+              <img
+                src={currentUser.profilePicture}
+                alt="profile"
+                className="h-7 w-7 rounded-full object-cover"
+              />
+            ) : (
+              <li>Sign In</li>
+            )}
           </Link>
         </ul>
       </div>
