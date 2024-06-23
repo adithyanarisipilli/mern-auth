@@ -4,9 +4,10 @@ import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -15,7 +16,7 @@ export default function SignUp() {
     e.preventDefault();
     try {
       setLoading(true);
-      setError(false);
+      setError(null);
       const res = await fetch("/backend/auth/signup", {
         method: "POST",
         headers: {
@@ -24,18 +25,24 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
       setLoading(false);
-      if (data.success === false) {
-        setError(true);
+      if (!data.success) {
+        if (data.message.includes("email")) {
+          setError("Email is already taken. Please choose a different one.");
+        } else if (data.message.includes("username")) {
+          setError("Username is already taken. Please choose a different one.");
+        } else {
+          setError("Something went wrong. Please try again later.");
+        }
         return;
       }
       navigate("/sign-in");
     } catch (error) {
       setLoading(false);
-      setError(true);
+      setError("Something went wrong. Please try again later.");
     }
   };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
@@ -46,6 +53,7 @@ export default function SignUp() {
           id="username"
           className="bg-slate-100 p-3 rounded-lg"
           onChange={handleChange}
+          required
         />
         <input
           type="email"
@@ -53,6 +61,7 @@ export default function SignUp() {
           id="email"
           className="bg-slate-100 p-3 rounded-lg"
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -60,6 +69,7 @@ export default function SignUp() {
           id="password"
           className="bg-slate-100 p-3 rounded-lg"
           onChange={handleChange}
+          required
         />
         <button
           disabled={loading}
@@ -75,7 +85,7 @@ export default function SignUp() {
           <span className="text-blue-500">Sign in</span>
         </Link>
       </div>
-      <p className="text-red-700 mt-5">{error && "Something went wrong!"}</p>
+      {error && <p className="text-red-700 mt-5">{error}</p>}
     </div>
   );
 }
