@@ -181,7 +181,9 @@ export default function Profile() {
           Sign out
         </span>
       </div>
-      <p className="text-red-700 mt-5">{error && "Something went wrong!"}</p>
+      <p className="text-red-700 mt-5">
+        {error && "Username or email already exists!"}
+      </p>
       <p className="text-green-700 mt-5">
         {updateSuccess && "User is updated successfully!"}
       </p>
