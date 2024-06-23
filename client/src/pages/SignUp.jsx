@@ -4,7 +4,7 @@ import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -15,7 +15,7 @@ export default function SignUp() {
     e.preventDefault();
     try {
       setLoading(true);
-      setError(false);
+      setError();
       const res = await fetch("/backend/auth/signup", {
         method: "POST",
         headers: {
@@ -27,13 +27,14 @@ export default function SignUp() {
       console.log(data);
       setLoading(false);
       if (data.success === false) {
-        setError(true);
+        // setError(true);
+        setError(data.message);
         return;
       }
       navigate("/sign-in");
     } catch (error) {
       setLoading(false);
-      setError(true);
+      setError(data.message);
     }
   };
   return (
@@ -75,7 +76,7 @@ export default function SignUp() {
           <span className="text-blue-500">Sign in</span>
         </Link>
       </div>
-      <p className="text-red-700 mt-5">{error && "Something went wrong!"}</p>
+      <p className="text-red-700 mt-5">{error.length && error}</p>
     </div>
   );
 }
