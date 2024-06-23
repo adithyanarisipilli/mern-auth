@@ -12,6 +12,7 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+const isProduction = process.env.NODE_ENV === "production";
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -19,6 +20,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }),
+    devTools: !isProduction, // Disable dev tools in production
 });
 
 export const persistor = persistStore(store);
