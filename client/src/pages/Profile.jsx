@@ -182,7 +182,7 @@ export default function Profile() {
         </span>
       </div>
       <p className="text-red-700 mt-5">
-        {error && "Username or Email already exists!"}
+        {error && "Username or email already exists!"}
       </p>
       <p className="text-green-700 mt-5">
         {updateSuccess && "User is updated successfully!"}
